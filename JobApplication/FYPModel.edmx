@@ -1,0 +1,1606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FYP_TEST_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Candidate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="500" />
+          <Property Name="Contact" Type="varchar" MaxLength="500" />
+          <Property Name="CNIC" Type="varchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="CityID" Type="bigint" />
+          <Property Name="Experience" Type="int" />
+          <Property Name="RoundNo" Type="int" />
+          <Property Name="Attachment" Type="varbinary(max)" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="500" />
+          <Property Name="ActiveStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Ex_Interview_Round1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="int" />
+          <Property Name="JobID" Type="int" />
+          <Property Name="SubmittedDate" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="LoginType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Ex_Quiz_Round2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="int" />
+          <Property Name="JobID" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Ex_Task_Round3">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="int" />
+          <Property Name="JobID" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Attachment" Type="varbinary(max)" />
+          <Property Name="TestExtension" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="TaskQID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tbl_jobtype">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_PostedJobs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Job_Title" Type="varchar" MaxLength="50" />
+          <Property Name="PositionID" Type="int" />
+          <Property Name="JobTypeID" Type="int" />
+          <Property Name="DeptID" Type="int" />
+          <Property Name="CityID" Type="bigint" />
+          <Property Name="RoomKey" Type="nvarchar" MaxLength="500" />
+          <Property Name="Experience" Type="int" />
+          <Property Name="Created_date" Type="date" />
+          <Property Name="Posted_date" Type="date" />
+          <Property Name="Closing_date" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_questionBank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionID" Type="int" />
+          <Property Name="JobTypeId" Type="int" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="OptionA" Type="varchar" MaxLength="50" />
+          <Property Name="OptionB" Type="varchar" MaxLength="50" />
+          <Property Name="OptionC" Type="varchar" MaxLength="50" />
+          <Property Name="OptionD" Type="varchar" MaxLength="50" />
+          <Property Name="CorrectAnswer" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_results_round2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateID" Type="int" />
+          <Property Name="Round2RecordID" Type="int" />
+          <Property Name="QuestionID" Type="int" />
+          <Property Name="CorrectAnswer" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_rounds">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionID" Type="int" />
+          <Property Name="JTypeID" Type="int" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="InsertedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Username" Type="nvarchar" MaxLength="500" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="500" />
+          <Property Name="ActiveStatus" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FYP_TEST_DB.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__PostedJob__DeptI__4316F928">
+          <End Role="tbl_department" Type="Self.tbl_department" Multiplicity="0..1" />
+          <End Role="tbl_PostedJobs" Type="Self.tbl_PostedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_department">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PostedJobs">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PostedJob__JobTy__4222D4EF">
+          <End Role="tbl_jobtype" Type="Self.tbl_jobtype" Multiplicity="0..1" />
+          <End Role="tbl_PostedJobs" Type="Self.tbl_PostedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_jobtype">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PostedJobs">
+              <PropertyRef Name="JobTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PostedJob__Posit__412EB0B6">
+          <End Role="tbl_positions" Type="Self.tbl_positions" Multiplicity="0..1" />
+          <End Role="tbl_PostedJobs" Type="Self.tbl_PostedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PostedJobs">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_In__Candi__286302EC">
+          <End Role="tbl_Candidate" Type="Self.tbl_Candidate" Multiplicity="0..1" />
+          <End Role="tbl_Ex_Interview_Round1" Type="Self.tbl_Ex_Interview_Round1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Candidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Interview_Round1">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_In__JobID__29572725">
+          <End Role="tbl_PostedJobs" Type="Self.tbl_PostedJobs" Multiplicity="0..1" />
+          <End Role="tbl_Ex_Interview_Round1" Type="Self.tbl_Ex_Interview_Round1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_PostedJobs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Interview_Round1">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_Qu__Candi__2B3F6F97">
+          <End Role="tbl_Candidate" Type="Self.tbl_Candidate" Multiplicity="0..1" />
+          <End Role="tbl_Ex_Quiz_Round2" Type="Self.tbl_Ex_Quiz_Round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Candidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Quiz_Round2">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_Qu__JobID__2C3393D0">
+          <End Role="tbl_PostedJobs" Type="Self.tbl_PostedJobs" Multiplicity="0..1" />
+          <End Role="tbl_Ex_Quiz_Round2" Type="Self.tbl_Ex_Quiz_Round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_PostedJobs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Quiz_Round2">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_Ta__Candi__2E1BDC42">
+          <End Role="tbl_Candidate" Type="Self.tbl_Candidate" Multiplicity="0..1" />
+          <End Role="tbl_Ex_Task_Round3" Type="Self.tbl_Ex_Task_Round3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Candidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Task_Round3">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_quest__Posit__30F848ED">
+          <End Role="tbl_positions" Type="Self.tbl_positions" Multiplicity="0..1" />
+          <End Role="tbl_questionBank" Type="Self.tbl_questionBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_questionBank">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_resul__Candi__31EC6D26">
+          <End Role="tbl_Candidate" Type="Self.tbl_Candidate" Multiplicity="0..1" />
+          <End Role="tbl_results_round2" Type="Self.tbl_results_round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Candidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_results_round2">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_resul__Quest__32E0915F">
+          <End Role="tbl_questionBank" Type="Self.tbl_questionBank" Multiplicity="0..1" />
+          <End Role="tbl_results_round2" Type="Self.tbl_results_round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_questionBank">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_results_round2">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_resul__Round__34C8D9D1">
+          <End Role="tbl_Ex_Quiz_Round2" Type="Self.tbl_Ex_Quiz_Round2" Multiplicity="0..1" />
+          <End Role="tbl_results_round2" Type="Self.tbl_results_round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ex_Quiz_Round2">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_results_round2">
+              <PropertyRef Name="Round2RecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_candidate_tbl_City">
+          <End Role="tbl_City" Type="Self.tbl_City" Multiplicity="0..1" />
+          <End Role="tbl_Candidate" Type="Self.tbl_Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Candidate">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostedJobs_tbl_City">
+          <End Role="tbl_City" Type="Self.tbl_City" Multiplicity="0..1" />
+          <End Role="tbl_PostedJobs" Type="Self.tbl_PostedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PostedJobs">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ex_Task_Round3_tbl_PostedJobs">
+          <End Role="tbl_PostedJobs" Type="Self.tbl_PostedJobs" Multiplicity="0..1" />
+          <End Role="tbl_Ex_Task_Round3" Type="Self.tbl_Ex_Task_Round3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_PostedJobs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Task_Round3">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ex_Task_Round3_tbl_Task">
+          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="0..1" />
+          <End Role="tbl_Ex_Task_Round3" Type="Self.tbl_Ex_Task_Round3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Task_Round3">
+              <PropertyRef Name="TaskQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_questionBank_tbl_jobtype">
+          <End Role="tbl_jobtype" Type="Self.tbl_jobtype" Multiplicity="0..1" />
+          <End Role="tbl_questionBank" Type="Self.tbl_questionBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_jobtype">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_questionBank">
+              <PropertyRef Name="JobTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Task_tbl_jobtype">
+          <End Role="tbl_jobtype" Type="Self.tbl_jobtype" Multiplicity="0..1" />
+          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_jobtype">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Task">
+              <PropertyRef Name="JTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Task_tbl_positions">
+          <End Role="tbl_positions" Type="Self.tbl_positions" Multiplicity="0..1" />
+          <End Role="tbl_Task" Type="Self.tbl_Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Task">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_CandidateDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contact" Type="nvarchar" Mode="In" />
+          <Parameter Name="CNIC" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Experience" Type="bigint" Mode="In" />
+          <Parameter Name="CityID" Type="bigint" Mode="In" />
+          <Parameter Name="PositionID" Type="bigint" Mode="In" />
+          <Parameter Name="JobTypeID" Type="bigint" Mode="In" />
+          <Parameter Name="DeptID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_DashboardCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetCandidateDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JobID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_GetCandidateResultStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetFiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportType" Type="nvarchar" Mode="In" />
+          <Parameter Name="ID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_GetInterviewQuestions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JobCategoryID" Type="bigint" Mode="In" />
+          <Parameter Name="JobTypeID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_GetJobPostDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetTask" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PositionID" Type="bigint" Mode="In" />
+          <Parameter Name="JobTypeID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_ReportQuestionBank" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PositionID" Type="bigint" Mode="In" />
+          <Parameter Name="JobTyoeID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_ReportRoundWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CandidateID" Type="bigint" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="RoundNo" Type="bigint" Mode="In" />
+          <Parameter Name="PositionID" Type="bigint" Mode="In" />
+          <Parameter Name="DepartmentID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_ViewQuestionBank" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CandidateID" Type="bigint" Mode="In" />
+        </Function>
+        <EntityContainer Name="FYP_TEST_DBModelStoreContainer">
+          <EntitySet Name="tbl_Candidate" EntityType="Self.tbl_Candidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_City" EntityType="Self.tbl_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_department" EntityType="Self.tbl_department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Ex_Interview_Round1" EntityType="Self.tbl_Ex_Interview_Round1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Ex_Quiz_Round2" EntityType="Self.tbl_Ex_Quiz_Round2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Ex_Task_Round3" EntityType="Self.tbl_Ex_Task_Round3" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_jobtype" EntityType="Self.tbl_jobtype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_positions" EntityType="Self.tbl_positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PostedJobs" EntityType="Self.tbl_PostedJobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_questionBank" EntityType="Self.tbl_questionBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_results_round2" EntityType="Self.tbl_results_round2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_rounds" EntityType="Self.tbl_rounds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Task" EntityType="Self.tbl_Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+[database_firewall_rules].[id] AS [id], 
+[database_firewall_rules].[name] AS [name], 
+[database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+[database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+[database_firewall_rules].[create_date] AS [create_date], 
+[database_firewall_rules].[modify_date] AS [modify_date]
+FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__PostedJob__DeptI__4316F928" Association="Self.FK__PostedJob__DeptI__4316F928">
+            <End Role="tbl_department" EntitySet="tbl_department" />
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PostedJob__JobTy__4222D4EF" Association="Self.FK__PostedJob__JobTy__4222D4EF">
+            <End Role="tbl_jobtype" EntitySet="tbl_jobtype" />
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PostedJob__Posit__412EB0B6" Association="Self.FK__PostedJob__Posit__412EB0B6">
+            <End Role="tbl_positions" EntitySet="tbl_positions" />
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_In__Candi__286302EC" Association="Self.FK__tbl_Ex_In__Candi__286302EC">
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+            <End Role="tbl_Ex_Interview_Round1" EntitySet="tbl_Ex_Interview_Round1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_In__JobID__29572725" Association="Self.FK__tbl_Ex_In__JobID__29572725">
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+            <End Role="tbl_Ex_Interview_Round1" EntitySet="tbl_Ex_Interview_Round1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_Qu__Candi__2B3F6F97" Association="Self.FK__tbl_Ex_Qu__Candi__2B3F6F97">
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+            <End Role="tbl_Ex_Quiz_Round2" EntitySet="tbl_Ex_Quiz_Round2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_Qu__JobID__2C3393D0" Association="Self.FK__tbl_Ex_Qu__JobID__2C3393D0">
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+            <End Role="tbl_Ex_Quiz_Round2" EntitySet="tbl_Ex_Quiz_Round2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_Ta__Candi__2E1BDC42" Association="Self.FK__tbl_Ex_Ta__Candi__2E1BDC42">
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+            <End Role="tbl_Ex_Task_Round3" EntitySet="tbl_Ex_Task_Round3" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_quest__Posit__30F848ED" Association="Self.FK__tbl_quest__Posit__30F848ED">
+            <End Role="tbl_positions" EntitySet="tbl_positions" />
+            <End Role="tbl_questionBank" EntitySet="tbl_questionBank" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_resul__Candi__31EC6D26" Association="Self.FK__tbl_resul__Candi__31EC6D26">
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+            <End Role="tbl_results_round2" EntitySet="tbl_results_round2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_resul__Quest__32E0915F" Association="Self.FK__tbl_resul__Quest__32E0915F">
+            <End Role="tbl_questionBank" EntitySet="tbl_questionBank" />
+            <End Role="tbl_results_round2" EntitySet="tbl_results_round2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_resul__Round__34C8D9D1" Association="Self.FK__tbl_resul__Round__34C8D9D1">
+            <End Role="tbl_Ex_Quiz_Round2" EntitySet="tbl_Ex_Quiz_Round2" />
+            <End Role="tbl_results_round2" EntitySet="tbl_results_round2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_candidate_tbl_City" Association="Self.FK_candidate_tbl_City">
+            <End Role="tbl_City" EntitySet="tbl_City" />
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostedJobs_tbl_City" Association="Self.FK_PostedJobs_tbl_City">
+            <End Role="tbl_City" EntitySet="tbl_City" />
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ex_Task_Round3_tbl_PostedJobs" Association="Self.FK_tbl_Ex_Task_Round3_tbl_PostedJobs">
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+            <End Role="tbl_Ex_Task_Round3" EntitySet="tbl_Ex_Task_Round3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ex_Task_Round3_tbl_Task" Association="Self.FK_tbl_Ex_Task_Round3_tbl_Task">
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
+            <End Role="tbl_Ex_Task_Round3" EntitySet="tbl_Ex_Task_Round3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_questionBank_tbl_jobtype" Association="Self.FK_tbl_questionBank_tbl_jobtype">
+            <End Role="tbl_jobtype" EntitySet="tbl_jobtype" />
+            <End Role="tbl_questionBank" EntitySet="tbl_questionBank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Task_tbl_jobtype" Association="Self.FK_tbl_Task_tbl_jobtype">
+            <End Role="tbl_jobtype" EntitySet="tbl_jobtype" />
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Task_tbl_positions" Association="Self.FK_tbl_Task_tbl_positions">
+            <End Role="tbl_positions" EntitySet="tbl_positions" />
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FYP_TEST_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveStatus" Type="Boolean" />
+          <NavigationProperty Name="tbl_PostedJobs" Relationship="FYP_TEST_DBModel.FK_PostedJobs_tbl_City" FromRole="tbl_City" ToRole="tbl_PostedJobs" />
+          <NavigationProperty Name="tbl_Candidate" Relationship="FYP_TEST_DBModel.FK_candidate_tbl_City" FromRole="tbl_City" ToRole="tbl_Candidate" />
+        </EntityType>
+        <EntityType Name="tbl_department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_PostedJobs" Relationship="FYP_TEST_DBModel.FK__PostedJob__DeptI__4316F928" FromRole="tbl_department" ToRole="tbl_PostedJobs" />
+        </EntityType>
+        <EntityType Name="tbl_jobtype">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_PostedJobs" Relationship="FYP_TEST_DBModel.FK__PostedJob__JobTy__4222D4EF" FromRole="tbl_jobtype" ToRole="tbl_PostedJobs" />
+          <NavigationProperty Name="tbl_Task" Relationship="FYP_TEST_DBModel.FK_tbl_Task_tbl_jobtype" FromRole="tbl_jobtype" ToRole="tbl_Task" />
+          <NavigationProperty Name="tbl_questionBank" Relationship="FYP_TEST_DBModel.FK_tbl_questionBank_tbl_jobtype" FromRole="tbl_jobtype" ToRole="tbl_questionBank" />
+        </EntityType>
+        <EntityType Name="tbl_positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_PostedJobs" Relationship="FYP_TEST_DBModel.FK__PostedJob__Posit__412EB0B6" FromRole="tbl_positions" ToRole="tbl_PostedJobs" />
+          <NavigationProperty Name="tbl_Task" Relationship="FYP_TEST_DBModel.FK_tbl_Task_tbl_positions" FromRole="tbl_positions" ToRole="tbl_Task" />
+          <NavigationProperty Name="tbl_questionBank" Relationship="FYP_TEST_DBModel.FK__tbl_quest__Posit__30F848ED" FromRole="tbl_positions" ToRole="tbl_questionBank" />
+        </EntityType>
+        <EntityType Name="tbl_rounds">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="UserPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveStatus" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="FYP_TEST_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_City" EntityType="Self.tbl_City" />
+          <EntitySet Name="tbl_department" EntityType="Self.tbl_department" />
+          <EntitySet Name="tbl_jobtype" EntityType="Self.tbl_jobtype" />
+          <EntitySet Name="tbl_positions" EntityType="Self.tbl_positions" />
+          <EntitySet Name="tbl_rounds" EntityType="Self.tbl_rounds" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" />
+          <EntitySet Name="tbl_PostedJobs" EntityType="FYP_TEST_DBModel.tbl_PostedJobs" />
+          <AssociationSet Name="FK_PostedJobs_tbl_City" Association="FYP_TEST_DBModel.FK_PostedJobs_tbl_City">
+            <End Role="tbl_City" EntitySet="tbl_City" />
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PostedJob__DeptI__4316F928" Association="FYP_TEST_DBModel.FK__PostedJob__DeptI__4316F928">
+            <End Role="tbl_department" EntitySet="tbl_department" />
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PostedJob__JobTy__4222D4EF" Association="FYP_TEST_DBModel.FK__PostedJob__JobTy__4222D4EF">
+            <End Role="tbl_jobtype" EntitySet="tbl_jobtype" />
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PostedJob__Posit__412EB0B6" Association="FYP_TEST_DBModel.FK__PostedJob__Posit__412EB0B6">
+            <End Role="tbl_positions" EntitySet="tbl_positions" />
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetInterviewQuestions" ReturnType="Collection(FYP_TEST_DBModel.sp_GetInterviewQuestions_Result)">
+            <Parameter Name="JobCategoryID" Mode="In" Type="Int64" />
+            <Parameter Name="JobTypeID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="tbl_Candidate" EntityType="FYP_TEST_DBModel.tbl_Candidate" />
+          <AssociationSet Name="FK_candidate_tbl_City" Association="FYP_TEST_DBModel.FK_candidate_tbl_City">
+            <End Role="tbl_City" EntitySet="tbl_City" />
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Ex_Interview_Round1" EntityType="FYP_TEST_DBModel.tbl_Ex_Interview_Round1" />
+          <EntitySet Name="tbl_Ex_Task_Round3" EntityType="FYP_TEST_DBModel.tbl_Ex_Task_Round3" />
+          <AssociationSet Name="FK__tbl_Ex_In__Candi__286302EC" Association="FYP_TEST_DBModel.FK__tbl_Ex_In__Candi__286302EC">
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+            <End Role="tbl_Ex_Interview_Round1" EntitySet="tbl_Ex_Interview_Round1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_Ta__Candi__2E1BDC42" Association="FYP_TEST_DBModel.FK__tbl_Ex_Ta__Candi__2E1BDC42">
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+            <End Role="tbl_Ex_Task_Round3" EntitySet="tbl_Ex_Task_Round3" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_In__JobID__29572725" Association="FYP_TEST_DBModel.FK__tbl_Ex_In__JobID__29572725">
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+            <End Role="tbl_Ex_Interview_Round1" EntitySet="tbl_Ex_Interview_Round1" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_Ta__JobID__2F10007B" Association="FYP_TEST_DBModel.FK__tbl_Ex_Ta__JobID__2F10007B">
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+            <End Role="tbl_Ex_Task_Round3" EntitySet="tbl_Ex_Task_Round3" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Ex_Quiz_Round2" EntityType="FYP_TEST_DBModel.tbl_Ex_Quiz_Round2" />
+          <AssociationSet Name="FK__tbl_Ex_Qu__Candi__2B3F6F97" Association="FYP_TEST_DBModel.FK__tbl_Ex_Qu__Candi__2B3F6F97">
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+            <End Role="tbl_Ex_Quiz_Round2" EntitySet="tbl_Ex_Quiz_Round2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Ex_Qu__JobID__2C3393D0" Association="FYP_TEST_DBModel.FK__tbl_Ex_Qu__JobID__2C3393D0">
+            <End Role="tbl_PostedJobs" EntitySet="tbl_PostedJobs" />
+            <End Role="tbl_Ex_Quiz_Round2" EntitySet="tbl_Ex_Quiz_Round2" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetJobPostDetail" ReturnType="Collection(FYP_TEST_DBModel.sp_GetJobPostDetail_Result)" />
+          <EntitySet Name="tbl_results_round2" EntityType="FYP_TEST_DBModel.tbl_results_round2" />
+          <AssociationSet Name="FK__tbl_resul__Candi__31EC6D26" Association="FYP_TEST_DBModel.FK__tbl_resul__Candi__31EC6D26">
+            <End Role="tbl_Candidate" EntitySet="tbl_Candidate" />
+            <End Role="tbl_results_round2" EntitySet="tbl_results_round2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_resul__Round__34C8D9D1" Association="FYP_TEST_DBModel.FK__tbl_resul__Round__34C8D9D1">
+            <End Role="tbl_Ex_Quiz_Round2" EntitySet="tbl_Ex_Quiz_Round2" />
+            <End Role="tbl_results_round2" EntitySet="tbl_results_round2" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Task" EntityType="FYP_TEST_DBModel.tbl_Task" />
+          <AssociationSet Name="FK_tbl_Ex_Task_Round3_tbl_Task" Association="FYP_TEST_DBModel.FK_tbl_Ex_Task_Round3_tbl_Task">
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
+            <End Role="tbl_Ex_Task_Round3" EntitySet="tbl_Ex_Task_Round3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Task_tbl_jobtype" Association="FYP_TEST_DBModel.FK_tbl_Task_tbl_jobtype">
+            <End Role="tbl_jobtype" EntitySet="tbl_jobtype" />
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Task_tbl_positions" Association="FYP_TEST_DBModel.FK_tbl_Task_tbl_positions">
+            <End Role="tbl_positions" EntitySet="tbl_positions" />
+            <End Role="tbl_Task" EntitySet="tbl_Task" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetTask" ReturnType="Collection(FYP_TEST_DBModel.sp_GetTask_Result)">
+            <Parameter Name="PositionID" Mode="In" Type="Int64" />
+            <Parameter Name="JobTypeID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DashboardCount" ReturnType="Collection(FYP_TEST_DBModel.sp_DashboardCount_Result)" />
+          <FunctionImport Name="sp_GetCandidateDetail" ReturnType="Collection(FYP_TEST_DBModel.sp_GetCandidateDetail_Result)">
+          <Parameter Name="JobID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ViewQuestionBank" ReturnType="Collection(FYP_TEST_DBModel.sp_ViewQuestionBank_Result)">
+          <Parameter Name="CandidateID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ReportQuestionBank" ReturnType="Collection(FYP_TEST_DBModel.sp_ReportQuestionBank_Result)">
+            <Parameter Name="PositionID" Mode="In" Type="Int64" />
+            <Parameter Name="JobTyoeID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ReportRoundWise" ReturnType="Collection(FYP_TEST_DBModel.sp_ReportRoundWise_Result)">
+            <Parameter Name="CandidateID" Mode="In" Type="Int64" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="RoundNo" Mode="In" Type="Int64" />
+            <Parameter Name="PositionID" Mode="In" Type="Int64" />
+            <Parameter Name="DepartmentID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CandidateDetail" ReturnType="Collection(FYP_TEST_DBModel.sp_CandidateDetail_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Contact" Mode="In" Type="String" />
+            <Parameter Name="CNIC" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Experience" Mode="In" Type="Int64" />
+            <Parameter Name="CityID" Mode="In" Type="Int64" />
+            <Parameter Name="PositionID" Mode="In" Type="Int64" />
+            <Parameter Name="JobTypeID" Mode="In" Type="Int64" />
+            <Parameter Name="DeptID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="tbl_questionBank" EntityType="FYP_TEST_DBModel.tbl_questionBank" />
+          <AssociationSet Name="FK_tbl_questionBank_tbl_jobtype" Association="FYP_TEST_DBModel.FK_tbl_questionBank_tbl_jobtype">
+            <End Role="tbl_jobtype" EntitySet="tbl_jobtype" />
+            <End Role="tbl_questionBank" EntitySet="tbl_questionBank" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_quest__Posit__30F848ED" Association="FYP_TEST_DBModel.FK__tbl_quest__Posit__30F848ED">
+            <End Role="tbl_positions" EntitySet="tbl_positions" />
+            <End Role="tbl_questionBank" EntitySet="tbl_questionBank" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_resul__Quest__32E0915F" Association="FYP_TEST_DBModel.FK__tbl_resul__Quest__32E0915F">
+            <End Role="tbl_questionBank" EntitySet="tbl_questionBank" />
+            <End Role="tbl_results_round2" EntitySet="tbl_results_round2" />
+          </AssociationSet>
+          <EntitySet Name="database_firewall_rules" EntityType="FYP_TEST_DBModel.database_firewall_rules" />
+          <FunctionImport Name="sp_GetFiles" ReturnType="Collection(FYP_TEST_DBModel.sp_GetFiles_Result)">
+            <Parameter Name="ReportType" Mode="In" Type="String" />
+            <Parameter Name="ID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetCandidateResultStatus" ReturnType="Collection(FYP_TEST_DBModel.sp_GetCandidateResultStatus_Result)" />
+          </EntityContainer>
+        <EntityType Name="tbl_PostedJobs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Job_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PositionID" Type="Int32" />
+          <Property Name="JobTypeID" Type="Int32" />
+          <Property Name="DeptID" Type="Int32" />
+          <Property Name="CityID" Type="Int64" />
+          <Property Name="RoomKey" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Experience" Type="Int32" />
+          <Property Name="Created_date" Type="DateTime" Precision="0" />
+          <Property Name="Posted_date" Type="DateTime" Precision="0" />
+          <Property Name="Closing_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_City" Relationship="FYP_TEST_DBModel.FK_PostedJobs_tbl_City" FromRole="tbl_PostedJobs" ToRole="tbl_City" />
+          <NavigationProperty Name="tbl_department" Relationship="FYP_TEST_DBModel.FK__PostedJob__DeptI__4316F928" FromRole="tbl_PostedJobs" ToRole="tbl_department" />
+          <NavigationProperty Name="tbl_jobtype" Relationship="FYP_TEST_DBModel.FK__PostedJob__JobTy__4222D4EF" FromRole="tbl_PostedJobs" ToRole="tbl_jobtype" />
+          <NavigationProperty Name="tbl_positions" Relationship="FYP_TEST_DBModel.FK__PostedJob__Posit__412EB0B6" FromRole="tbl_PostedJobs" ToRole="tbl_positions" />
+          <NavigationProperty Name="tbl_Ex_Interview_Round1" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_In__JobID__29572725" FromRole="tbl_PostedJobs" ToRole="tbl_Ex_Interview_Round1" />
+          <NavigationProperty Name="tbl_Ex_Task_Round3" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_Ta__JobID__2F10007B" FromRole="tbl_PostedJobs" ToRole="tbl_Ex_Task_Round3" />
+          <NavigationProperty Name="tbl_Ex_Quiz_Round2" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_Qu__JobID__2C3393D0" FromRole="tbl_PostedJobs" ToRole="tbl_Ex_Quiz_Round2" />
+        </EntityType>
+        <Association Name="FK_PostedJobs_tbl_City">
+          <End Type="FYP_TEST_DBModel.tbl_City" Role="tbl_City" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_PostedJobs" Role="tbl_PostedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PostedJobs">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PostedJob__DeptI__4316F928">
+          <End Type="FYP_TEST_DBModel.tbl_department" Role="tbl_department" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_PostedJobs" Role="tbl_PostedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_department">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PostedJobs">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PostedJob__JobTy__4222D4EF">
+          <End Type="FYP_TEST_DBModel.tbl_jobtype" Role="tbl_jobtype" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_PostedJobs" Role="tbl_PostedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_jobtype">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PostedJobs">
+              <PropertyRef Name="JobTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PostedJob__Posit__412EB0B6">
+          <End Type="FYP_TEST_DBModel.tbl_positions" Role="tbl_positions" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_PostedJobs" Role="tbl_PostedJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_PostedJobs">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetInterviewQuestions_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PositionID" Nullable="true" />
+          <Property Type="Int32" Name="JobTypeId" Nullable="true" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OptionA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OptionB" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OptionC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OptionD" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CorrectAnswer" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="tbl_Candidate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CNIC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CityID" Type="Int64" />
+          <Property Name="Experience" Type="Int32" />
+          <Property Name="RoundNo" Type="Int32" />
+          <Property Name="Attachment" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_City" Relationship="FYP_TEST_DBModel.FK_candidate_tbl_City" FromRole="tbl_Candidate" ToRole="tbl_City" />
+          <NavigationProperty Name="tbl_Ex_Interview_Round1" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_In__Candi__286302EC" FromRole="tbl_Candidate" ToRole="tbl_Ex_Interview_Round1" />
+          <NavigationProperty Name="tbl_Ex_Task_Round3" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_Ta__Candi__2E1BDC42" FromRole="tbl_Candidate" ToRole="tbl_Ex_Task_Round3" />
+          <NavigationProperty Name="tbl_Ex_Quiz_Round2" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_Qu__Candi__2B3F6F97" FromRole="tbl_Candidate" ToRole="tbl_Ex_Quiz_Round2" />
+          <NavigationProperty Name="tbl_results_round2" Relationship="FYP_TEST_DBModel.FK__tbl_resul__Candi__31EC6D26" FromRole="tbl_Candidate" ToRole="tbl_results_round2" />
+        </EntityType>
+        <Association Name="FK_candidate_tbl_City">
+          <End Type="FYP_TEST_DBModel.tbl_City" Role="tbl_City" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Candidate" Role="tbl_Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Candidate">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_Ex_Interview_Round1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int32" />
+          <Property Name="JobID" Type="Int32" />
+          <Property Name="SubmittedDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoginType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Candidate" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_In__Candi__286302EC" FromRole="tbl_Ex_Interview_Round1" ToRole="tbl_Candidate" />
+          <NavigationProperty Name="tbl_PostedJobs" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_In__JobID__29572725" FromRole="tbl_Ex_Interview_Round1" ToRole="tbl_PostedJobs" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_Ex_Task_Round3">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int32" />
+          <Property Name="JobID" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Attachment" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TestExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Candidate" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_Ta__Candi__2E1BDC42" FromRole="tbl_Ex_Task_Round3" ToRole="tbl_Candidate" />
+          <NavigationProperty Name="tbl_PostedJobs" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_Ta__JobID__2F10007B" FromRole="tbl_Ex_Task_Round3" ToRole="tbl_PostedJobs" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="TaskQID" Type="Int64" />
+          <NavigationProperty Name="tbl_Task" Relationship="FYP_TEST_DBModel.FK_tbl_Ex_Task_Round3_tbl_Task" FromRole="tbl_Ex_Task_Round3" ToRole="tbl_Task" />
+        </EntityType>
+        <Association Name="FK__tbl_Ex_In__Candi__286302EC">
+          <End Type="FYP_TEST_DBModel.tbl_Candidate" Role="tbl_Candidate" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Ex_Interview_Round1" Role="tbl_Ex_Interview_Round1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Candidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Interview_Round1">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_Ta__Candi__2E1BDC42">
+          <End Type="FYP_TEST_DBModel.tbl_Candidate" Role="tbl_Candidate" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Ex_Task_Round3" Role="tbl_Ex_Task_Round3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Candidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Task_Round3">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_In__JobID__29572725">
+          <End Type="FYP_TEST_DBModel.tbl_PostedJobs" Role="tbl_PostedJobs" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Ex_Interview_Round1" Role="tbl_Ex_Interview_Round1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_PostedJobs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Interview_Round1">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_Ta__JobID__2F10007B">
+          <End Type="FYP_TEST_DBModel.tbl_PostedJobs" Role="tbl_PostedJobs" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Ex_Task_Round3" Role="tbl_Ex_Task_Round3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_PostedJobs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Task_Round3">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_Ex_Quiz_Round2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int32" />
+          <Property Name="JobID" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Candidate" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_Qu__Candi__2B3F6F97" FromRole="tbl_Ex_Quiz_Round2" ToRole="tbl_Candidate" />
+          <NavigationProperty Name="tbl_PostedJobs" Relationship="FYP_TEST_DBModel.FK__tbl_Ex_Qu__JobID__2C3393D0" FromRole="tbl_Ex_Quiz_Round2" ToRole="tbl_PostedJobs" />
+          <NavigationProperty Name="tbl_results_round2" Relationship="FYP_TEST_DBModel.FK__tbl_resul__Round__34C8D9D1" FromRole="tbl_Ex_Quiz_Round2" ToRole="tbl_results_round2" />
+        </EntityType>
+        <Association Name="FK__tbl_Ex_Qu__Candi__2B3F6F97">
+          <End Type="FYP_TEST_DBModel.tbl_Candidate" Role="tbl_Candidate" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Ex_Quiz_Round2" Role="tbl_Ex_Quiz_Round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Candidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Quiz_Round2">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Ex_Qu__JobID__2C3393D0">
+          <End Type="FYP_TEST_DBModel.tbl_PostedJobs" Role="tbl_PostedJobs" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Ex_Quiz_Round2" Role="tbl_Ex_Quiz_Round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_PostedJobs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Quiz_Round2">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetJobPostDetail_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Job_Title" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Experience" Nullable="true" />
+          <Property Type="String" Name="RoomKey" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PositionName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="JobType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalApply" Nullable="true" />
+          <Property Type="DateTime" Name="Created_date" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tbl_results_round2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateID" Type="Int32" />
+          <Property Name="Round2RecordID" Type="Int32" />
+          <Property Name="QuestionID" Type="Int32" />
+          <Property Name="CorrectAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Candidate" Relationship="FYP_TEST_DBModel.FK__tbl_resul__Candi__31EC6D26" FromRole="tbl_results_round2" ToRole="tbl_Candidate" />
+          <NavigationProperty Name="tbl_Ex_Quiz_Round2" Relationship="FYP_TEST_DBModel.FK__tbl_resul__Round__34C8D9D1" FromRole="tbl_results_round2" ToRole="tbl_Ex_Quiz_Round2" />
+          <NavigationProperty Name="tbl_questionBank" Relationship="FYP_TEST_DBModel.FK__tbl_resul__Quest__32E0915F" FromRole="tbl_results_round2" ToRole="tbl_questionBank" />
+        </EntityType>
+        <Association Name="FK__tbl_resul__Candi__31EC6D26">
+          <End Type="FYP_TEST_DBModel.tbl_Candidate" Role="tbl_Candidate" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_results_round2" Role="tbl_results_round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Candidate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_results_round2">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_resul__Round__34C8D9D1">
+          <End Type="FYP_TEST_DBModel.tbl_Ex_Quiz_Round2" Role="tbl_Ex_Quiz_Round2" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_results_round2" Role="tbl_results_round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ex_Quiz_Round2">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_results_round2">
+              <PropertyRef Name="Round2RecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionID" Type="Int32" />
+          <Property Name="JTypeID" Type="Int32" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsertedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_Ex_Task_Round3" Relationship="FYP_TEST_DBModel.FK_tbl_Ex_Task_Round3_tbl_Task" FromRole="tbl_Task" ToRole="tbl_Ex_Task_Round3" />
+          <NavigationProperty Name="tbl_jobtype" Relationship="FYP_TEST_DBModel.FK_tbl_Task_tbl_jobtype" FromRole="tbl_Task" ToRole="tbl_jobtype" />
+          <NavigationProperty Name="tbl_positions" Relationship="FYP_TEST_DBModel.FK_tbl_Task_tbl_positions" FromRole="tbl_Task" ToRole="tbl_positions" />
+        </EntityType>
+        <Association Name="FK_tbl_Ex_Task_Round3_tbl_Task">
+          <End Type="FYP_TEST_DBModel.tbl_Task" Role="tbl_Task" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Ex_Task_Round3" Role="tbl_Ex_Task_Round3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Ex_Task_Round3">
+              <PropertyRef Name="TaskQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Task_tbl_jobtype">
+          <End Type="FYP_TEST_DBModel.tbl_jobtype" Role="tbl_jobtype" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Task" Role="tbl_Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_jobtype">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Task">
+              <PropertyRef Name="JTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Task_tbl_positions">
+          <End Type="FYP_TEST_DBModel.tbl_positions" Role="tbl_positions" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_Task" Role="tbl_Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Task">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetTask_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PositionID" Nullable="true" />
+          <Property Type="Int32" Name="JTypeID" Nullable="true" />
+          <Property Type="String" Name="Question" Nullable="true" />
+          <Property Type="DateTime" Name="InsertedDateTime" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_DashboardCount_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+          <Property Type="Int32" Name="ReportType" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetCandidateDetail_Result">
+          <Property Type="Int32" Name="CID" Nullable="false" />
+          <Property Type="Int32" Name="JID" Nullable="true" />
+          <Property Type="Int32" Name="Round" Nullable="false" />
+          <Property Type="String" Name="Round1" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="Round2" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="Round3" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="CName" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="CMobileNo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="CNIC" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" />
+          <Property Type="Int32" Name="Experience" Nullable="false" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="sp_ViewQuestionBank_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="CandidateID" Nullable="true" />
+          <Property Type="Int32" Name="QuestionID" Nullable="true" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CorrectAnswer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="YourAnswer" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_ReportQuestionBank_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PositionID" Nullable="true" />
+          <Property Type="Int32" Name="JobTypeId" Nullable="true" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OptionA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OptionB" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OptionC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OptionD" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CorrectAnswer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PositionName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobType" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_ReportRoundWise_Result">
+          <Property Type="Int32" Name="RoundNo" Nullable="false" />
+          <Property Type="Int32" Name="CandidateID" Nullable="true" />
+          <Property Type="String" Name="CandidateName" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="JobID" Nullable="true" />
+          <Property Type="String" Name="RoundStatus" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Job_Title" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_CandidateDetail_Result">
+          <Property Type="Int32" Name="CID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="String" Name="Contact" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CNIC" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Experience" Nullable="true" />
+          <Property Type="Int32" Name="RoundNo" Nullable="true" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="500" />
+          <Property Type="Int64" Name="CityID" Nullable="true" />
+          <Property Type="String" Name="Job_Title" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PositionName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="tbl_questionBank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionID" Type="Int32" />
+          <Property Name="JobTypeId" Type="Int32" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OptionA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OptionB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OptionC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OptionD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CorrectAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_jobtype" Relationship="FYP_TEST_DBModel.FK_tbl_questionBank_tbl_jobtype" FromRole="tbl_questionBank" ToRole="tbl_jobtype" />
+          <NavigationProperty Name="tbl_positions" Relationship="FYP_TEST_DBModel.FK__tbl_quest__Posit__30F848ED" FromRole="tbl_questionBank" ToRole="tbl_positions" />
+          <NavigationProperty Name="tbl_results_round2" Relationship="FYP_TEST_DBModel.FK__tbl_resul__Quest__32E0915F" FromRole="tbl_questionBank" ToRole="tbl_results_round2" />
+        </EntityType>
+        <Association Name="FK_tbl_questionBank_tbl_jobtype">
+          <End Type="FYP_TEST_DBModel.tbl_jobtype" Role="tbl_jobtype" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_questionBank" Role="tbl_questionBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_jobtype">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_questionBank">
+              <PropertyRef Name="JobTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_quest__Posit__30F848ED">
+          <End Type="FYP_TEST_DBModel.tbl_positions" Role="tbl_positions" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_questionBank" Role="tbl_questionBank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_questionBank">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_resul__Quest__32E0915F">
+          <End Type="FYP_TEST_DBModel.tbl_questionBank" Role="tbl_questionBank" Multiplicity="0..1" />
+          <End Type="FYP_TEST_DBModel.tbl_results_round2" Role="tbl_results_round2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_questionBank">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_results_round2">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <ComplexType Name="sp_GetFiles_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Binary" Name="Attachment" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetCandidateResultStatus_Result">
+          <Property Type="Int32" Name="CandidateID" Nullable="false" />
+          <Property Type="Int32" Name="JObID" Nullable="false" />
+          <Property Type="String" Name="CandidateName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CandidateContact" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CnadidateCNIC" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CandidateEmail" Nullable="true" />
+          <Property Type="String" Name="CandidateCity" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="ResultStatus" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PositionName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Experience" Nullable="true" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FYP_TEST_DBModelStoreContainer" CdmEntityContainer="FYP_TEST_DBEntities">
+          <EntitySetMapping Name="tbl_City">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_City">
+              <MappingFragment StoreEntitySet="tbl_City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_department">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_department">
+              <MappingFragment StoreEntitySet="tbl_department">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_jobtype">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_jobtype">
+              <MappingFragment StoreEntitySet="tbl_jobtype">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_positions">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_positions">
+              <MappingFragment StoreEntitySet="tbl_positions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_rounds">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_rounds">
+              <MappingFragment StoreEntitySet="tbl_rounds">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Users">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_Users">
+              <MappingFragment StoreEntitySet="tbl_Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PostedJobs">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_PostedJobs">
+              <MappingFragment StoreEntitySet="tbl_PostedJobs">
+                <ScalarProperty Name="Closing_date" ColumnName="Closing_date" />
+                <ScalarProperty Name="Posted_date" ColumnName="Posted_date" />
+                <ScalarProperty Name="Created_date" ColumnName="Created_date" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="RoomKey" ColumnName="RoomKey" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="JobTypeID" ColumnName="JobTypeID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetInterviewQuestions" FunctionName="FYP_TEST_DBModel.Store.sp_GetInterviewQuestions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_GetInterviewQuestions_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="JobTypeId" ColumnName="JobTypeId" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="OptionA" ColumnName="OptionA" />
+                <ScalarProperty Name="OptionB" ColumnName="OptionB" />
+                <ScalarProperty Name="OptionC" ColumnName="OptionC" />
+                <ScalarProperty Name="OptionD" ColumnName="OptionD" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_Candidate">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_Candidate">
+              <MappingFragment StoreEntitySet="tbl_Candidate">
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="RoundNo" ColumnName="RoundNo" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Ex_Interview_Round1">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_Ex_Interview_Round1">
+              <MappingFragment StoreEntitySet="tbl_Ex_Interview_Round1">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="LoginType" ColumnName="LoginType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Ex_Task_Round3">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_Ex_Task_Round3">
+              <MappingFragment StoreEntitySet="tbl_Ex_Task_Round3">
+                <ScalarProperty Name="TaskQID" ColumnName="TaskQID" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="TestExtension" ColumnName="TestExtension" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Ex_Quiz_Round2">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_Ex_Quiz_Round2">
+              <MappingFragment StoreEntitySet="tbl_Ex_Quiz_Round2">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetJobPostDetail" FunctionName="FYP_TEST_DBModel.Store.sp_GetJobPostDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_GetJobPostDetail_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="RoomKey" ColumnName="RoomKey" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="TotalApply" ColumnName="TotalApply" />
+                <ScalarProperty Name="Created_date" ColumnName="Created_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_results_round2">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_results_round2">
+              <MappingFragment StoreEntitySet="tbl_results_round2">
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="Round2RecordID" ColumnName="Round2RecordID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Task">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_Task">
+              <MappingFragment StoreEntitySet="tbl_Task">
+                <ScalarProperty Name="InsertedDateTime" ColumnName="InsertedDateTime" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="JTypeID" ColumnName="JTypeID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetTask" FunctionName="FYP_TEST_DBModel.Store.sp_GetTask">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_GetTask_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="JTypeID" ColumnName="JTypeID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="InsertedDateTime" ColumnName="InsertedDateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_DashboardCount" FunctionName="FYP_TEST_DBModel.Store.sp_DashboardCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_DashboardCount_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+                <ScalarProperty Name="ReportType" ColumnName="ReportType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetCandidateDetail" FunctionName="FYP_TEST_DBModel.Store.sp_GetCandidateDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_GetCandidateDetail_Result">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="JID" ColumnName="JID" />
+                <ScalarProperty Name="Round" ColumnName="Round" />
+                <ScalarProperty Name="Round1" ColumnName="Round1" />
+                <ScalarProperty Name="Round2" ColumnName="Round2" />
+                <ScalarProperty Name="Round3" ColumnName="Round3" />
+                <ScalarProperty Name="CName" ColumnName="CName" />
+                <ScalarProperty Name="CMobileNo" ColumnName="CMobileNo" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ViewQuestionBank" FunctionName="FYP_TEST_DBModel.Store.sp_ViewQuestionBank">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_ViewQuestionBank_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="YourAnswer" ColumnName="YourAnswer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ReportQuestionBank" FunctionName="FYP_TEST_DBModel.Store.sp_ReportQuestionBank">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_ReportQuestionBank_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="JobTypeId" ColumnName="JobTypeId" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="OptionA" ColumnName="OptionA" />
+                <ScalarProperty Name="OptionB" ColumnName="OptionB" />
+                <ScalarProperty Name="OptionC" ColumnName="OptionC" />
+                <ScalarProperty Name="OptionD" ColumnName="OptionD" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ReportRoundWise" FunctionName="FYP_TEST_DBModel.Store.sp_ReportRoundWise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_ReportRoundWise_Result">
+                <ScalarProperty Name="RoundNo" ColumnName="RoundNo" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="RoundStatus" ColumnName="RoundStatus" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_CandidateDetail" FunctionName="FYP_TEST_DBModel.Store.sp_CandidateDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_CandidateDetail_Result">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="RoundNo" ColumnName="RoundNo" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_questionBank">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.tbl_questionBank">
+              <MappingFragment StoreEntitySet="tbl_questionBank">
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="OptionD" ColumnName="OptionD" />
+                <ScalarProperty Name="OptionC" ColumnName="OptionC" />
+                <ScalarProperty Name="OptionB" ColumnName="OptionB" />
+                <ScalarProperty Name="OptionA" ColumnName="OptionA" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="JobTypeId" ColumnName="JobTypeId" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="FYP_TEST_DBModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetFiles" FunctionName="FYP_TEST_DBModel.Store.sp_GetFiles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_GetFiles_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetCandidateResultStatus" FunctionName="FYP_TEST_DBModel.Store.sp_GetCandidateResultStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYP_TEST_DBModel.sp_GetCandidateResultStatus_Result">
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="JObID" ColumnName="JObID" />
+                <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+                <ScalarProperty Name="CandidateContact" ColumnName="CandidateContact" />
+                <ScalarProperty Name="CnadidateCNIC" ColumnName="CnadidateCNIC" />
+                <ScalarProperty Name="CandidateEmail" ColumnName="CandidateEmail" />
+                <ScalarProperty Name="CandidateCity" ColumnName="CandidateCity" />
+                <ScalarProperty Name="ResultStatus" ColumnName="ResultStatus" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
